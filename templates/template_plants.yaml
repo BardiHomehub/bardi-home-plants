@@ -1,0 +1,44 @@
+- sensor:
+    - name: "Kalanchoe - Next Watering"
+      unique_id: kalanchoe_next_watering
+      state: >
+        {% set last = states('input_datetime.kalanchoe_last_watering') %}
+        {% set interval = states('input_number.kalanchoe_watering_interval') | int %}
+        {% if last not in ['unknown', 'unavailable'] %}
+          {{ (as_timestamp(last) + interval * 86400) | timestamp_custom('%Y-%m-%d') }}
+        {% else %}
+          unavailable
+        {% endif %}
+
+    - name: "Kalanchoe - Next Fertilizing"
+      unique_id: kalanchoe_next_fertilizing
+      state: >
+        {% set last = states('input_datetime.kalanchoe_last_fertilizing') %}
+        {% set interval = states('input_number.kalanchoe_fertilizing_interval') | int %}
+        {% if last not in ['unknown', 'unavailable'] %}
+          {{ (as_timestamp(last) + interval * 86400) | timestamp_custom('%Y-%m-%d') }}
+        {% else %}
+          unavailable
+        {% endif %}
+
+    - name: "Kalanchoe - Days Since Last Fertilizing"
+      unique_id: kalanchoe_days_since_fertilizing
+      unit_of_measurement: "days"
+      state: >
+        {% set last = states('input_datetime.kalanchoe_last_fertilizing') %}
+        {% if last not in ['unknown', 'unavailable'] %}
+          {{ ((as_timestamp(now()) - as_timestamp(last)) / 86400) | round(0) }}
+        {% else %}
+          unavailable
+        {% endif %}
+
+    - name: "Kalanchoe - Days Since Last Watering"
+      unique_id: kalanchoe_days_since_watering
+      unit_of_measurement: "days"
+      state: >
+        {% set last = states('input_datetime.kalanchoe_last_watering') %}
+        {% if last not in ['unknown', 'unavailable'] %}
+          {{ ((as_timestamp(now()) - as_timestamp(last)) / 86400) | round(0) }}
+        {% else %}
+          unavailable
+        {% endif %}

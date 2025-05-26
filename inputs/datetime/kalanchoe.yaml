@@ -1,0 +1,9 @@
+kalanchoe_last_watering:
+  name: Kalanchoe Last Watering
+  has_date: true
+  has_time: true
+
+kalanchoe_last_fertilizing:
+  name: Kalanchoe Last Fertilizing
+  has_date: true
+  has_time: true

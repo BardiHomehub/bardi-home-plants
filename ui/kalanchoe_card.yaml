@@ -1,0 +1,89 @@
+type: vertical-stack
+cards:
+  - type: custom:button-card
+    entity: sensor.kalanchoe_next_watering
+    name: Kalanchoe
+    show_icon: false
+    show_state: false
+    show_name: true
+    styles:
+      name:
+        - background: rgba(0, 0, 0, 0.5)
+        - color: white
+        - font-size: 18px
+        - font-weight: bold
+        - text-align: center
+        - padding: 8px
+        - width: 100%
+        - border-top-left-radius: 0px
+        - border-top-right-radius: 0px
+        - border-bottom-left-radius: 10px
+        - border-bottom-right-radius: 10px
+        - position: absolute
+        - bottom: 0px
+        - left: 0px
+      card:
+        - background-image: url("/local/Kalanchoe.jpg")
+        - background-size: cover
+        - background-position: center
+        - border-radius: 10px
+        - padding-bottom: 75%
+        - height: auto
+        - box-shadow: none
+        - position: relative
+    tap_action:
+      action: fire-dom-event
+      browser_mod:
+        service: browser_mod.popup
+        data:
+          title: Kalanchoe Care
+          content:
+            type: markdown
+            content: >
+              ## 🌸 Kalanchoe Care
+
+              **💧 Watering:** Only when the soil is completely dry  
+              **☀️ Light:** Prefers bright, sunny locations  
+              **🌡️ Temperature:** 16–26 °C  
+              **🌫️ Humidity:** Tolerates dry air  
+              **🌱 Fertilizing:** Once a month is enough  
+              **🔁 Repotting:** Every 1–2 years in spring
+
+              > Tip: Too much water may cause root rot – better to underwater than overwater!
+  - type: entities
+    entities:
+      - entity: input_datetime.kalanchoe_last_watering
+        name: Last Watering
+      - entity: input_number.kalanchoe_watering_interval
+        name: Watering Interval (days)
+      - entity: sensor.kalanchoe_next_watering
+        name: Next Watering Due (date)
+      - entity: sensor.kalanchoe_days_since_watering
+        name: Days Since Last Watering
+      - type: divider
+      - entity: input_datetime.kalanchoe_last_fertilizing
+        name: Last Fertilizing
+      - entity: input_number.kalanchoe_fertilizing_interval
+        name: Fertilizing Interval (days)
+      - entity: sensor.kalanchoe_next_fertilizing
+        name: Next Fertilizing Due (date)
+      - entity: sensor.kalanchoe_days_since_fertilizing
+        name: Days Since Last Fertilizing
+  - type: horizontal-stack
+    cards:
+      - type: button
+        name: Watered
+        icon: mdi:watering-can
+        tap_action:
+          action: call-service
+          service: input_button.press
+          target:
+            entity_id: input_button.kalanchoe_watered
+      - type: button
+        name: Fertilized
+        icon: mdi:water-plus
+        tap_action:
+          action: call-service
+          service: input_button.press
+          target:
+            entity_id: input_button.kalanchoe_fertilized

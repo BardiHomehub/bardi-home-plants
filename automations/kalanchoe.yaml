@@ -1,0 +1,53 @@
+# 🌿 Kalanchoe - "Watered" button sets last watering date
+- alias: Kalanchoe - Watered Button
+  trigger:
+    - platform: state
+      entity_id: input_button.kalanchoe_watered
+  action:
+    - service: input_datetime.set_datetime
+      target:
+        entity_id: input_datetime.kalanchoe_last_watering
+      data:
+        datetime: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+
+# 🌿 Kalanchoe - "Fertilized" button sets last fertilizing date
+- alias: Kalanchoe - Fertilized Button
+  trigger:
+    - platform: state
+      entity_id: input_button.kalanchoe_fertilized
+  action:
+    - service: input_datetime.set_datetime
+      target:
+        entity_id: input_datetime.kalanchoe_last_fertilizing
+      data:
+        datetime: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+
+# 🌿 Kalanchoe - Watering reminder
+- alias: Kalanchoe - Watering Reminder
+  trigger:
+    - platform: time
+      at: "08:00:00"
+  condition:
+    - condition: template
+      value_template: >
+        {{ states('sensor.kalanchoe_next_watering') == now().date().strftime('%Y-%m-%d') }}
+  action:
+    - service: persistent_notification.create
+      data:
+        title: "🌿 Kalanchoe"
+        message: "Time to water your Kalanchoe! 💧"
+
+# 🌿 Kalanchoe - Fertilizing reminder
+- alias: Kalanchoe - Fertilizing Reminder
+  trigger:
+    - platform: time
+      at: "08:00:00"
+  condition:
+    - condition: template
+      value_template: >
+        {{ states('sensor.kalanchoe_next_fertilizing') == now().date().strftime('%Y-%m-%d') }}
+  action:
+    - service: persistent_notification.create
+      data:
+        title: "🌿 Kalanchoe"
+        message: "Time to fertilize your Kalanchoe! 🌱"
