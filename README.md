@@ -1,3 +1,8 @@
+![MIT License](https://img.shields.io/github/license/BardiHomehub/bardi-home-plants)
+![GitHub release](https://img.shields.io/github/v/release/BardiHomehub/bardi-home-plants)
+![Last Commit](https://img.shields.io/github/last-commit/BardiHomehub/bardi-home-plants)
+
+
 # 🌿 Bardi Home – Plant Tracker for Home Assistant
 
 A modular YAML-based system to track watering and fertilizing of your plants in Home Assistant.  
