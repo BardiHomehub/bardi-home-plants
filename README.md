@@ -1,3 +1,5 @@
+<img src="assets/all_plants_card.jpg" width="100%" alt="Plant Tracker UI preview">
+
 ![MIT License](https://img.shields.io/github/license/BardiHomehub/bardi-home-plants)
 ![GitHub release](https://img.shields.io/github/v/release/BardiHomehub/bardi-home-plants)
 ![Last Commit](https://img.shields.io/github/last-commit/BardiHomehub/bardi-home-plants)
